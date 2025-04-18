@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { Session } from "next-auth";
 import { users } from "@/lib/auth";
@@ -12,63 +12,39 @@ interface CustomSession extends Session {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        try {
-          const user = users.find(
-            (u) =>
-              u.email === credentials?.email &&
-              u.password === credentials?.password
-          );
-          
-          if (user) {
-            return { 
-              id: user.id, 
-              name: user.name, 
-              email: user.email 
-            };
-          }
-          return null;
-        } catch (error) {
-          console.error("Auth error:", error);
-          return null;
+        if (!credentials?.email || !credentials?.password) return null;
+        
+        // For demo purposes, using a hardcoded user
+        const user = {
+          id: "1",
+          email: "shoaibahmed@gmail.com",
+          password: "123456"
+        };
+
+        if (credentials.email === user.email && credentials.password === user.password) {
+          return { id: user.id, email: user.email };
         }
+
+        return null;
       }
     })
   ],
   pages: {
     signIn: "/login",
-    error: "/login"
   },
   session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
+    strategy: "jwt" as const,
   },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-      }
-      return token;
-    },
-    async session({ session, token }): Promise<CustomSession> {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id as string
-        }
-      };
-    }
-  },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
