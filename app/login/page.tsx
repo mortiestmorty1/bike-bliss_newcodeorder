@@ -14,7 +14,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Redirect if already authenticated
   useEffect(() => {
     if (status === "authenticated") {
       router.push("/");
@@ -45,7 +44,7 @@ export default function LoginPage() {
     }
   };
 
-  // Show loading state while checking session
+  
   if (status === "loading") {
     return null;
   }
@@ -59,7 +58,7 @@ export default function LoginPage() {
         <div className="absolute bottom-0 left-1/2 w-[500px] h-[500px] bg-green-500/20 rounded-full blur-[120px] -translate-x-1/2 translate-y-1/2"></div>
       </div>
 
-      {/* Login Card */}
+
       <div className="w-full max-w-md p-8 relative z-10">
         <div className="bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-10 shadow-xl border border-white/[0.05]">
           <div className="flex flex-col items-center space-y-3 mb-10">

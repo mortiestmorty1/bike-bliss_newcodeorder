@@ -21,9 +21,15 @@ export default async function HomePage() {
       <Header />
       <main>
         <Hero />
-        <Features />
-        <Testimonial />
-        <FAQ />
+        <section id="features" className="scroll-mt-20">
+          <Features />
+        </section>
+        <section id="testimonials" className="scroll-mt-20">
+          <Testimonial />
+        </section>
+        <section id="faqs" className="scroll-mt-20">
+          <FAQ />
+        </section>
         <CTA />
       </main>
       <Footer />

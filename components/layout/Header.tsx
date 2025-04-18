@@ -12,36 +12,52 @@ export default function Header() {
     await signOut({ redirect: true, callbackUrl: "/login" });
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#1C1B23] py-4">
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-
           <Link href="/" className="text-xl font-medium text-white">
             Bike Bliss
           </Link>
 
-
           <div className="hidden md:flex items-center space-x-12">
-            <Link href="/features" className="text-white hover:text-gray-200 transition-colors text-base">
+            <button
+              onClick={() => scrollToSection('features')}
+              className="text-white hover:text-gray-200 transition-colors text-base"
+            >
               Features
-            </Link>
-            <Link href="/testimonials" className="text-white hover:text-gray-200 transition-colors text-base">
+            </button>
+            <button
+              onClick={() => scrollToSection('testimonials')}
+              className="text-white hover:text-gray-200 transition-colors text-base"
+            >
               Testimonials
-            </Link>
-            <Link href="/faqs" className="text-white hover:text-gray-200 transition-colors text-base">
+            </button>
+            <button
+              onClick={() => scrollToSection('faqs')}
+              className="text-white hover:text-gray-200 transition-colors text-base"
+            >
               Faqs
-            </Link>
+            </button>
           </div>
 
-
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              href="/contact"
+            <a
+              href="https://www.linkedin.com/in/shoaib-ahmed-94ba3225b"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-[#6366F1] text-white px-6 py-2 rounded-lg hover:bg-[#5558DA] transition-colors text-base"
             >
               Contact
-            </Link>
+            </a>
             {session && (
               <button
                 onClick={handleLogout}
@@ -51,7 +67,6 @@ export default function Header() {
               </button>
             )}
           </div>
-
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -75,38 +90,35 @@ export default function Header() {
           </button>
         </div>
 
-
         {isMenuOpen && (
           <div className="md:hidden mt-4">
             <div className="flex flex-col space-y-4">
-              <Link
-                href="/features"
-                className="text-white hover:text-gray-200 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => scrollToSection('features')}
+                className="text-white hover:text-gray-200 transition-colors text-left"
               >
                 Features
-              </Link>
-              <Link
-                href="/testimonials"
-                className="text-white hover:text-gray-200 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => scrollToSection('testimonials')}
+                className="text-white hover:text-gray-200 transition-colors text-left"
               >
                 Testimonials
-              </Link>
-              <Link
-                href="/faqs"
-                className="text-white hover:text-gray-200 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => scrollToSection('faqs')}
+                className="text-white hover:text-gray-200 transition-colors text-left"
               >
                 Faqs
-              </Link>
-              <Link
-                href="/contact"
+              </button>
+              <a
+                href="https://www.linkedin.com/in/shoaib-ahmed-94ba3225b"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#6366F1] text-white px-4 py-2 rounded-lg hover:bg-[#5558DA] transition-colors inline-block text-center"
-                onClick={() => setIsMenuOpen(false)}
               >
                 Contact
-              </Link>
+              </a>
               {session && (
                 <button
                   onClick={() => {
