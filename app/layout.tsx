@@ -1,25 +1,24 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Providers from './providers'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Providers from "./providers";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: 'Bike Bliss - Premium Motorcycles',
-  description: 'Experience the thrill of premium motorcycles with Bike Bliss.',
-}
+export const metadata: Metadata = {
+  title: "Bike Bliss - Your Ultimate Cycling Companion",
+  description: "Discover the perfect bike for your needs with Bike Bliss. Compare, choose, and ride with confidence.",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
-      <body className="min-h-screen bg-[#1C1B23]" suppressHydrationWarning>
-        <Providers>
-          {children}
-        </Providers>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

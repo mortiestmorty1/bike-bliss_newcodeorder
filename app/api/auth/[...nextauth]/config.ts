@@ -1,6 +1,10 @@
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+if (!process.env.NEXTAUTH_SECRET) {
+  throw new Error('Please provide process.env.NEXTAUTH_SECRET');
+}
+
 export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
@@ -49,4 +53,5 @@ export const authOptions: AuthOptions = {
     }
   },
   secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === 'development',
 }; 
