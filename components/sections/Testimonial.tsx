@@ -29,9 +29,8 @@ export default function Testimonial() {
 
           <div className="relative">
 
-            <div className="absolute -top-8 left-0 text-[#6366F1]/10 text-9xl font-serif">"</div>
-            <div className="absolute -bottom-8 right-0 text-[#6366F1]/10 text-9xl font-serif rotate-180">"</div>
-            
+          <div className="absolute -top-8 left-0 text-[#6366F1]/10 text-9xl font-serif">&ldquo;</div>
+          <div className="absolute -bottom-8 right-0 text-[#6366F1]/10 text-9xl font-serif rotate-180">&rdquo;</div>
             <blockquote className="text-2xl md:text-4xl font-bold text-white leading-relaxed mb-6 px-4">
               Absolutely love my ThunderBolt! Smooth ride, sleek design, and unbeatable performance
             </blockquote>

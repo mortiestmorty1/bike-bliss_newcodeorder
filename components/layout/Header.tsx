@@ -6,7 +6,7 @@ import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { data: session } = useSession();
+  const { status } = useSession();
 
   const handleLogout = async () => {
     await signOut({ redirect: true, callbackUrl: "/login" });
@@ -58,7 +58,7 @@ export default function Header() {
             >
               Contact
             </a>
-            {session && (
+            {status === "authenticated" && (
               <button
                 onClick={handleLogout}
                 className="bg-white/10 text-white px-6 py-2 rounded-lg hover:bg-white/20 transition-colors text-base"
@@ -119,7 +119,7 @@ export default function Header() {
               >
                 Contact
               </a>
-              {session && (
+              {status === "authenticated" && (
                 <button
                   onClick={() => {
                     handleLogout();
