@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 export default function CTA() {
@@ -12,12 +14,14 @@ export default function CTA() {
             Explore our collection and find the perfect bike for you.
           </h2>
           
-          <Link
-            href="/bikes"
-            className="inline-block bg-[#6366F1] text-white px-8 py-3 rounded-lg hover:bg-[#5558DA] transition-all duration-300 text-lg font-medium"
-          >
-            Get Started
-          </Link>
+          <div className="mt-8">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+            >
+              Get Started
+            </button>
+          </div>
         </div>
       </div>
     </section>

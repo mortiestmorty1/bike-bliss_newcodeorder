@@ -101,12 +101,16 @@ export default function FAQ() {
             <p className="text-gray-400 mb-8">
               Support details to capture customers that might be on the fence.
             </p>
-            <Link
-              href="/contact"
-              className="inline-block bg-[#6366F1] text-white px-8 py-3 rounded-lg hover:bg-[#5558DA] transition-all duration-300"
-            >
-              Contact
-            </Link>
+            <div className="mt-8">
+              <a
+                href="https://www.linkedin.com/in/shoaibahmed"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+              >
+                Contact Us
+              </a>
+            </div>
           </div>
         </div>
       </div>
