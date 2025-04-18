@@ -47,7 +47,7 @@ export default function BikeCard({ title, description, imageUrl, align = 'right'
       <Modal
         isOpen={showBuyModal}
         onClose={() => setShowBuyModal(false)}
-        title="Congratulations! 🎉"
+        title="Congratulations!"
       >
         <div className="space-y-4 text-center">
           <h3 className="text-xl font-semibold text-white">
