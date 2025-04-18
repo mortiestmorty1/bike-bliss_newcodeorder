@@ -1,20 +1,26 @@
+import './globals.css'
+import { Inter } from 'next/font/google'
+import Providers from './providers'
 
-import "../styles/globals.css";
-import type { Metadata } from "next";
+const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
-export const metadata: Metadata = {
-  title: "Bike Bliss | Premium Urban Cycling",
-  description: "Experience the future of cycling with Bike Bliss.",
-};
+export const metadata = {
+  title: 'BikeBliss',
+  description: 'Your premium bike shop',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="bg-black text-white">{children}</body>
+    <html lang="en" className={inter.className}>
+      <body>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
