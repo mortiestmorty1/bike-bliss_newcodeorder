@@ -5,59 +5,54 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
-  const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session } = useSession();
+
+  const handleLogout = async () => {
+    await signOut({ redirect: true, callbackUrl: "/login" });
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-lg border-b border-white/[0.05]">
-      <nav className="container mx-auto px-4 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#1C1B23] py-4">
+      <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="text-xl font-semibold text-white">
-            BikeBliss
+
+          <Link href="/" className="text-xl font-medium text-white">
+            Bike Bliss
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/bikes" className="text-gray-300 hover:text-white transition-colors">
-              Bikes
+
+          <div className="hidden md:flex items-center space-x-12">
+            <Link href="/features" className="text-white hover:text-gray-200 transition-colors text-base">
+              Features
             </Link>
-            <Link href="/accessories" className="text-gray-300 hover:text-white transition-colors">
-              Accessories
+            <Link href="/testimonials" className="text-white hover:text-gray-200 transition-colors text-base">
+              Testimonials
             </Link>
-            <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
-              Contact
+            <Link href="/faqs" className="text-white hover:text-gray-200 transition-colors text-base">
+              Faqs
             </Link>
           </div>
 
-          {/* User Menu */}
+
           <div className="hidden md:flex items-center space-x-4">
-            {session ? (
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-300">
-                  Welcome, {session.user?.name}
-                </span>
-                <button
-                  onClick={() => signOut()}
-                  className="bg-white/10 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-colors"
-                >
-                  Sign Out
-                </button>
-              </div>
-            ) : (
-              <Link
-                href="/login"
-                className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+            <Link
+              href="/contact"
+              className="bg-[#6366F1] text-white px-6 py-2 rounded-lg hover:bg-[#5558DA] transition-colors text-base"
+            >
+              Contact
+            </Link>
+            {session && (
+              <button
+                onClick={handleLogout}
+                className="bg-white/10 text-white px-6 py-2 rounded-lg hover:bg-white/20 transition-colors text-base"
               >
-                Sign In
-              </Link>
+                Logout
+              </button>
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-white"
@@ -80,61 +75,48 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
+          <div className="md:hidden mt-4">
             <div className="flex flex-col space-y-4">
               <Link
-                href="/bikes"
-                className="text-gray-300 hover:text-white transition-colors"
+                href="/features"
+                className="text-white hover:text-gray-200 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Bikes
+                Features
               </Link>
               <Link
-                href="/accessories"
-                className="text-gray-300 hover:text-white transition-colors"
+                href="/testimonials"
+                className="text-white hover:text-gray-200 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Accessories
+                Testimonials
               </Link>
               <Link
-                href="/about"
-                className="text-gray-300 hover:text-white transition-colors"
+                href="/faqs"
+                className="text-white hover:text-gray-200 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                About
+                Faqs
               </Link>
               <Link
                 href="/contact"
-                className="text-gray-300 hover:text-white transition-colors"
+                className="bg-[#6366F1] text-white px-4 py-2 rounded-lg hover:bg-[#5558DA] transition-colors inline-block text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
-              {session ? (
-                <>
-                  <span className="text-gray-300">
-                    Welcome, {session.user?.name}
-                  </span>
-                  <button
-                    onClick={() => {
-                      signOut();
-                      setIsMenuOpen(false);
-                    }}
-                    className="bg-white/10 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-colors"
-                  >
-                    Sign Out
-                  </button>
-                </>
-              ) : (
-                <Link
-                  href="/login"
-                  className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors inline-block text-center"
-                  onClick={() => setIsMenuOpen(false)}
+              {session && (
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="bg-white/10 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-colors text-center"
                 >
-                  Sign In
-                </Link>
+                  Logout
+                </button>
               )}
             </div>
           </div>

@@ -2,11 +2,11 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Providers from './providers'
 
-const inter = Inter({ subsets: ['latin'], display: 'swap' })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'BikeBliss',
-  description: 'Your premium bike shop',
+  title: 'Bike Bliss - Premium Motorcycles',
+  description: 'Experience the thrill of premium motorcycles with Bike Bliss.',
 }
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body>
+      <body className="min-h-screen bg-[#1C1B23]" suppressHydrationWarning>
         <Providers>
           {children}
         </Providers>
